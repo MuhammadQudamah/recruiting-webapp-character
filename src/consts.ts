@@ -1,38 +1,40 @@
-export const ATTRIBUTE_LIST = [
-  'Strength',
-  'Dexterity',
-  'Constitution',
-  'Intelligence',
-  'Wisdom',
-  'Charisma',
-] as const;
+import type { Attributes, Class } from "./types";
 
-export const CLASS_LIST = {
-  'Barbarian': {
-    'Strength': 14,
-    'Dexterity': 9,
-    'Constitution': 9,
-    'Intelligence': 9,
-    'Wisdom': 9,
-    'Charisma': 9,
-  },
-  'Wizard': {
-    'Strength': 9,
-    'Dexterity': 9,
-    'Constitution': 9,
-    'Intelligence': 14,
-    'Wisdom': 9,
-    'Charisma': 9,
-  },
-  'Bard': {
-    'Strength': 9,
-    'Dexterity': 9,
-    'Constitution': 9,
-    'Intelligence': 9,
-    'Wisdom': 9,
-    'Charisma': 14,
-  }
-} as const;
+export const ATTRIBUTE_LIST = [
+    'Strength',
+    'Dexterity',
+    'Constitution',
+    'Intelligence',
+    'Wisdom',
+    'Charisma',
+];
+
+export const CLASS_LIST: Record<Class, Attributes> = {
+    'Barbarian': {
+        'Strength': 14,
+        'Dexterity': 9,
+        'Constitution': 9,
+        'Intelligence': 9,
+        'Wisdom': 9,
+        'Charisma': 9,
+    },
+    'Wizard': {
+        'Strength': 9,
+        'Dexterity': 9,
+        'Constitution': 9,
+        'Intelligence': 14,
+        'Wisdom': 9,
+        'Charisma': 9,
+    },
+    'Bard': {
+        'Strength': 9,
+        'Dexterity': 9,
+        'Constitution': 9,
+        'Intelligence': 9,
+        'Wisdom': 9,
+        'Charisma': 14,
+    },
+}
 
 export const SKILL_LIST = [
     { name: 'Acrobatics', attributeModifier: 'Dexterity' },
@@ -54,4 +56,4 @@ export const SKILL_LIST = [
     { name: 'Stealth', attributeModifier: 'Dexterity' },
     { name: 'Survival', attributeModifier: 'Wisdom' },
 
-] as const;
+]
