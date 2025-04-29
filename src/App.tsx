@@ -1,22 +1,53 @@
 import { useState } from 'react';
 import './App.css';
-import { ATTRIBUTE_LIST, CLASS_LIST, SKILL_LIST } from './consts.js';
+import { ATTRIBUTE_LIST } from './consts';
+import type { Attributes } from './types';
 
+type Character = {
+  attributes: Attributes;
+};
 
 function App() {
-  const [num, setNum] = useState<number>(0);
+  const [characters, setCharacters] = useState<Character[]>([{
+    attributes: {
+      Strength: 10,
+      Dexterity: 10,
+      Constitution: 10,
+      Intelligence: 10,
+      Wisdom: 10,
+      Charisma: 10,
+    }
+  }]);
+
+  const [activeCharacterIndex, setActiveCharacterIndex] = useState(0);
+
+  const calculateModifier = (value: number) => Math.floor((value - 10) / 2);
+
+  const updateAttribute = (attribute: keyof Attributes, value: number) => {
+    const newCharacters = [...characters];
+    newCharacters[activeCharacterIndex].attributes[attribute] = value;
+    setCharacters(newCharacters);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>React Coding Exercise</h1>
-      </header>
-      <section className="App-section">
-        <div>
-          Value:
-          {num}
-          <button>+</button>
-          <button>-</button>
+      <header>
+        <h1>RPG Character Sheet</h1>
+        <div className="character-tabs">
+          <button onClick={() => setActiveCharacterIndex(0)}>Character 1</button>
         </div>
+      </header>
+
+      <section className="attributes">
+        <h2>Attributes</h2>
+        {ATTRIBUTE_LIST.map((attr) => (
+          <div key={attr} className="attribute-row">
+            <span>{attr}: {characters[activeCharacterIndex].attributes[attr]}</span>
+            <button onClick={() => updateAttribute(attr, characters[activeCharacterIndex].attributes[attr] + 1)}>+</button>
+            <button onClick={() => updateAttribute(attr, characters[activeCharacterIndex].attributes[attr] - 1)}>-</button>
+            <span>Modifier: {calculateModifier(characters[activeCharacterIndex].attributes[attr])}</span>
+          </div>
+        ))}
       </section>
     </div>
   );
