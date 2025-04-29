@@ -14,3 +14,27 @@
   margin: 10px 0;
   align-items: center;
 }
+
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.classes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.class-item {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.meets-requirements {
+  background-color: #e8f5e9;
+  border-color: #a5d6a7;
+}
