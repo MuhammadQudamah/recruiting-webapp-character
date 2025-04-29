@@ -3,9 +3,12 @@ import './App.css';
 import { ATTRIBUTE_LIST } from './consts';
 import type { Attributes } from './types';
 import { CharacterClasses } from './components/CharacterClasses';
+import { CharacterSkills } from './components/CharacterSkills';
 
 type Character = {
   attributes: Attributes;
+  skills: Record<string, number>;
+  skillPoints: number;
 };
 
 function App() {
@@ -17,7 +20,9 @@ function App() {
       Intelligence: 10,
       Wisdom: 10,
       Charisma: 10,
-    }
+    },
+    skills: {},
+    skillPoints: 10
   }]);
 
   const [activeCharacterIndex, setActiveCharacterIndex] = useState(0);
@@ -27,6 +32,13 @@ function App() {
   const updateAttribute = (attribute: keyof Attributes, value: number) => {
     const newCharacters = [...characters];
     newCharacters[activeCharacterIndex].attributes[attribute] = value;
+    setCharacters(newCharacters);
+  };
+
+  const updateSkill = (skillName: string, value: number) => {
+    const newValue = Math.max(0, value);
+    const newCharacters = [...characters];
+    newCharacters[activeCharacterIndex].skills[skillName] = newValue;
     setCharacters(newCharacters);
   };
 
@@ -52,6 +64,14 @@ function App() {
           ))}
         </section>
         <CharacterClasses attributes={characters[activeCharacterIndex].attributes} />
+        <CharacterSkills
+          skills={characters[activeCharacterIndex].skills}
+          attributes={characters[activeCharacterIndex].attributes}
+          skillPoints={characters[activeCharacterIndex].skillPoints}
+          onUpdateSkill={updateSkill}
+          calculateModifier={calculateModifier}
+        />
+
       </div>
     </div>
   );
